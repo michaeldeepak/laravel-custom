@@ -11,7 +11,8 @@
         "php": "^7.1.3",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.7.*",
-        "laravel/tinker": "^1.0"
+        "laravel/tinker": "^1.0",
+        "pc/custom": "dev-master"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
@@ -28,12 +29,15 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "providers": [
+              "Pc\\Custom\\CustomServiceProvider"
+            ]
         }
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Pc\\Custom\\": "pc/custom/src/"
         },
         "classmap": [
             "database/seeds",
@@ -58,5 +62,15 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ]
-    }
+    },
+
+    "repositories": [
+        {
+            "type": "path",
+            "url": "Pc/Custom",
+            "options": {
+                "symlink": true
+            }
+        }
+    ]
 }

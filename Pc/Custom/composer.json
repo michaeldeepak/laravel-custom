@@ -1,0 +1,12 @@
+{
+    "name": "pc/custom",
+    "description": "Custom Reporting templates",
+    "authors": [
+        {
+            "name": "Michael Deepak",
+            "email": "deepakonet@gmail.com"
+        }
+    ],
+    "type": "project",
+    "require": {}
+}

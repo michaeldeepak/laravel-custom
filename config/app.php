@@ -162,6 +162,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+        Pc\Custom\CustomServiceProvider::class,
         /*
          * Package Service Providers...
          */

@@ -3,6 +3,7 @@
 namespace Pc\Custom;
 
 use Illuminate\Support\ServiceProvider;
+use Pc\Custom\Commands\CreateCustom;
 
 class CustomServiceProvider extends ServiceProvider
 {
@@ -13,7 +14,11 @@ class CustomServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                CreateCustom::class,
+            ]);
+        }
     }
 
     /**

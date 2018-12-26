@@ -1,5 +1,25 @@
 <?php
 
+$mysqlConnection = [];
+for ($i = 1; $i < 3; $i++) {
+    $mysqlConnection["DB{$i}"] = [
+        'driver' => 'mysql',
+        'host' => env('DB_HOST', '127.0.0.1'),
+        'port' => '330' . $i,
+        'database' => env('DB_DATABASE', 'online'),
+        'username' => env('DB_USERNAME', 'pcm_user'),
+        'password' => env('DB_PASSWORD', ''),
+        'unix_socket' => env('DB_SOCKET', ''),
+        'charset' => 'utf8mb4',
+        'collation' => 'utf8mb4_unicode_ci',
+        'prefix' => '',
+        'prefix_indexes' => true,
+        'strict' => true,
+        'engine' => null,
+    ];
+
+}
+
 return [
 
     /*
@@ -82,7 +102,7 @@ return [
             'prefix_indexes' => true,
         ],
 
-    ],
+    ]+$mysqlConnection,
 
     /*
     |--------------------------------------------------------------------------

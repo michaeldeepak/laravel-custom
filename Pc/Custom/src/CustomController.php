@@ -16,6 +16,8 @@ class CustomController extends Controller
     public function index($timezone)
     {
         echo Carbon::now($timezone)->toDateTimeString();
+
+        dump(config("database.connections"));
     }
 
 }

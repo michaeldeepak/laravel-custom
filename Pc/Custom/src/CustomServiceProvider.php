@@ -30,6 +30,5 @@ class CustomServiceProvider extends ServiceProvider
     {
         //
         include __DIR__.'/routes/web.php';
-        $this->app->make('Pc\Custom\CustomController');
     }
 }

@@ -1,0 +1,9 @@
+<?php
+
+use Custom_lib_DummyClass_lookup;
+
+require_once __DiR__.'/../lookup.sub';
+class Custom_DummyClass extends Custom
+{
+    //
+}

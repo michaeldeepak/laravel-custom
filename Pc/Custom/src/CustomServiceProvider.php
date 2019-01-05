@@ -19,6 +19,8 @@ class CustomServiceProvider extends ServiceProvider
                 CreateCustom::class,
             ]);
         }
+        $this->loadRoutesFrom(__DIR__.'/routes/web.php');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'pc');
     }
 
     /**
@@ -28,7 +30,5 @@ class CustomServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
-        include __DIR__.'/routes/web.php';
     }
 }

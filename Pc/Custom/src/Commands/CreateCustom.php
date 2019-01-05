@@ -4,6 +4,7 @@ namespace Pc\Custom\Commands;
 
 use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Input\InputOption;
+use Illuminate\Support\Str;
 
 class CreateCustom extends GeneratorCommand
 {
@@ -30,16 +31,16 @@ class CreateCustom extends GeneratorCommand
 
     public function handle()
     {
-        if (parent::handle() === false && ! $this->option('force')) {
+        if (parent::handle() === false && !$this->option('force')) {
             return;
         }
+        $this->createFactory();
 
-       /* if (! $this->files->isDirectory(dirname($path))) {
-            $this->files->makeDirectory(dirname($path), 0777, true, true);
-        }*/
+        /* if (! $this->files->isDirectory(dirname($path))) {
+             $this->files->makeDirectory(dirname($path), 0777, true, true);
+         }*/
 
     }
-
 
 
     /**
@@ -49,13 +50,31 @@ class CreateCustom extends GeneratorCommand
      */
     protected function getStub()
     {
-        return __DIR__.'/../stubs/model.stub';
+        if ($this->option('pivot')) {
+            return __DIR__ . '/stubs/lookup.stub';
+        }
+        return __DIR__ . '/../stubs/model.stub';
+    }
+
+    /**
+     * Create a model factory for the model.
+     *
+     * @return void
+     */
+    protected function createFactory()
+    {
+        $factory = Str::studly(class_basename($this->argument('name')));
+
+        $this->call('make:factory', [
+            'name' => "{$factory}Factory",
+            '--model' => $this->qualifyClass($this->getNameInput()),
+        ]);
     }
 
     /**
      * Get the default namespace for the class.
      *
-     * @param  string  $rootNamespace
+     * @param  string $rootNamespace
      * @return string
      */
     protected function getDefaultNamespace($rootNamespace)
@@ -72,6 +91,7 @@ class CreateCustom extends GeneratorCommand
     {
         return [
             ['force', null, InputOption::VALUE_NONE, 'Create the class even if the class already exists'],
+            ['pivot', 'p', InputOption::VALUE_NONE, 'Indicates if the generated model should be a custom intermediate table model'],
 
         ];
     }
